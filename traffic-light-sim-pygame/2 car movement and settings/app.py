@@ -73,7 +73,7 @@ cars=[[],[],[],[]]
 movingcars=[]
 
 
-lights=[Light(locations[0],cars[0]),Light(locations[1],cars[1]),Light(locations[2],cars[2]),Light(locations[3],cars[3])]
+lights=[Light(locations[0]),Light(locations[1]),Light(locations[2]),Light(locations[3])]
 
 
 for i in range(0,4):

@@ -17,14 +17,16 @@ from app_settings import defaultyellowlighttime,defaultgreenlighttime,useautocar
 
 class Light:
 
-    def __init__(self, loc, cars):
+    def __init__(self, loc):
 
         self.x = loc[0]
         self.y = loc[1]
 
         self.waitingtime = 0
 
-        self.cars = cars
+        self.cars = []
+
+        self.numberofcars=0
 
         # on 0 1 2
         self.on = 0
@@ -152,7 +154,7 @@ class Light:
         if useautocar:
 
             for lightsetting in carcountsettings:
-                if len(self.cars) >= lightsetting["mincars"]:
+                if self.numberofcars >= lightsetting["mincars"]:
                     self.greencount = lightsetting["green"]
                     self.lightchangecount = lightsetting["yellow"]
 

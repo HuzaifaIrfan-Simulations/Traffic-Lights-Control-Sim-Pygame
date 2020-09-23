@@ -17,14 +17,14 @@ from app_settings import defaultyellowlighttime,defaultgreenlighttime,useautocar
 
 class Light:
 
-    def __init__(self, loc, cars):
+    def __init__(self, loc):
 
         self.x = loc[0]
         self.y = loc[1]
 
         self.waitingtime = 0
 
-        self.cars = cars
+        self.cars=[]
 
         # on 0 1 2
         self.on = 0

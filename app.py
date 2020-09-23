@@ -2,7 +2,7 @@
 
 from Light import Light
 
-from Car import Car
+# from Car import Car
 
 import pygame
 
@@ -16,7 +16,11 @@ import time
 import json
 
 
-from app_settings import carmovepersecond,mincargen,maxcargen
+from app_settings import useautocar
+
+# from app_settings import carmovepersecond,mincargen,maxcargen
+
+
 
 # import socketio
 
@@ -68,27 +72,27 @@ locations=[(shift+250,shift+0),(shift+0,shift+250),(shift+250,shift+500),(shift+
 
 
 
-cars=[[],[],[],[]]
+# cars=[[],[],[],[]]
 
-movingcars=[]
-
-
-lights=[Light(locations[0],cars[0]),Light(locations[1],cars[1]),Light(locations[2],cars[2]),Light(locations[3],cars[3])]
+# movingcars=[]
 
 
-for i in range(0,4):
-    num=randint(mincargen,maxcargen)
-    for n in range(0,num):
-        cars[i].append(i)
+lights=[Light(locations[0]),Light(locations[1]),Light(locations[2]),Light(locations[3])]
 
 
-def getnewcars(i):
-    global cars
+# for i in range(0,4):
+#     num=randint(mincargen,maxcargen)
+#     for n in range(0,num):
+#         cars[i].append(i)
 
-    # newcars=[]
-    num=randint(mincargen,maxcargen)
-    for n in range(0,num):
-        cars[i].append(i)
+
+# def getnewcars(i):
+#     global cars
+
+#     # newcars=[]
+#     num=randint(mincargen,maxcargen)
+#     for n in range(0,num):
+#         cars[i].append(i)
 
     
 
@@ -135,44 +139,44 @@ lightnow=0
 greenon=False
 
 
-carmovingtime=[0,0,0,0]
+# carmovingtime=[0,0,0,0]
 
-# prevtime = int(time.time())
+# # prevtime = int(time.time())
 
-def movecars():
-    global carmovingtime
+# def movecars():
+#     global carmovingtime
 
 
-    for n in range(0,4):
-        if lights[n].on==2:
+#     for n in range(0,4):
+#         if lights[n].on==2:
             
 
 
-            newtime = int(time.time())
-            diff=newtime-carmovingtime[n]
+#             newtime = int(time.time())
+#             diff=newtime-carmovingtime[n]
 
-            diff=diff*carmovepersecond
+#             diff=diff*carmovepersecond
 
-            for i in range(0,diff):
-                if(len(cars[n])>0):
-                    cars[n].remove(n)
+#             for i in range(0,diff):
+#                 if(len(cars[n])>0):
+#                     cars[n].remove(n)
 
-                    moveto=random.choice(prevlights[n])
-
-
-                    movingcars.append(Car(n,moveto,locations[n],locations[moveto]))
+#                     moveto=random.choice(prevlights[n])
 
 
-
-
-        carmovingtime[n] = int(time.time())
+#                     movingcars.append(Car(n,moveto,locations[n],locations[moveto]))
 
 
 
-def carpassed(n):
 
-    fromto=movingcars.pop(n)
-    # print("passed",fromto)
+#         carmovingtime[n] = int(time.time())
+
+
+
+# def carpassed(n):
+
+#     fromto=movingcars.pop(n)
+#     # print("passed",fromto)
     
 
 
@@ -201,10 +205,22 @@ while(run):
         lights[lightnow].setgreen=True
         greenon=True
 
-        if lightnow==0:
-            getnewcars(3)
-        else:
-            getnewcars(lightnow-1)
+
+
+        # if lightnow==0:
+        #     getnewcars(3)
+        # else:
+        #     getnewcars(lightnow-1)
+
+        ###############################3
+        ## get number of cars from camera detection module
+
+
+        if useautocar :
+            pass
+
+
+
 
     if greenon==True:
         if lights[lightnow].setgreen==False:
@@ -216,16 +232,16 @@ while(run):
             greenon=False
 
     
-    for n,car in enumerate(movingcars):
+    # for n,car in enumerate(movingcars):
 
-        car.move()
-        car.draw(win)
+    #     car.move()
+    #     car.draw(win)
 
-        if car.x<0 or car.x >WIN_WIDTH:
-            carpassed(n)
+    #     if car.x<0 or car.x >WIN_WIDTH:
+    #         carpassed(n)
 
-        if car.y<0 or car.y >WIN_HEIGHT:
-            carpassed(n)
+    #     if car.y<0 or car.y >WIN_HEIGHT:
+    #         carpassed(n)
 
 
 
@@ -236,12 +252,12 @@ while(run):
         
         light.running()
 
-        light.cars=cars[n]
+        # light.cars=cars[n]
         
         light.draw(win)
 
     
-    movecars()
+    # movecars()
 
 
 
