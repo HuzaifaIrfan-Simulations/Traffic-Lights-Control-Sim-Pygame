@@ -2,14 +2,59 @@
 
 from Light import Light
 
+from Car import Car
+
 import pygame
 
+# import asyncio
 
 from random import randint
+
+import random
+
+import time
+import json
+
+# import socketio
+
+# # standard Python
+# sio = socketio.Client()
+
+# try:
+#     sio.connect('http://localhost:3008')
+#     print("connected to server")
+
+# except:
+#     print("cannot connect to server")
+
+
+
+# @sio.event
+# def connect():
+#     print("I'm connected!")
+
+# @sio.event
+# def connect_error():
+#     print("The connection failed!")
+
+# @sio.event
+# def disconnect():
+#     print("I'm disconnected!")
+
+
+
+
 
 
 WIN_WIDTH=800
 WIN_HEIGHT=800
+
+
+
+pygame.font.init()
+
+
+STAT_FONT = pygame.font.SysFont("comicsans", 30)
 
 shift=50
 
@@ -17,27 +62,32 @@ directions=["north","east","south","west"]
 
 locations=[(shift+250,shift+0),(shift+0,shift+250),(shift+250,shift+500),(shift+500,shift+250)]
 
-lights=[Light(locations[0]),Light(locations[1]),Light(locations[2]),Light(locations[3])]
 
 
 
 cars=[[],[],[],[]]
 
+movingcars=[]
+
+
+lights=[Light(locations[0],cars[0]),Light(locations[1],cars[1]),Light(locations[2],cars[2]),Light(locations[3],cars[3])]
+
+
 for i in range(0,4):
     num=randint(0,25)
     for n in range(0,num):
-        cars[i].append(0)
+        cars[i].append(i)
 
 
 def getnewcars(i):
     global cars
 
-    newcars=[]
+    # newcars=[]
     num=randint(0,25)
     for n in range(0,num):
-        newcars.append(0)
+        cars[i].append(i)
 
-    cars[i]=newcars
+    
 
 
 
@@ -72,6 +122,8 @@ def countremainingtime():
 
 
 
+
+
 win= pygame.display.set_mode((WIN_WIDTH,WIN_HEIGHT))
 clock=pygame.time.Clock()
 
@@ -80,9 +132,51 @@ lightnow=0
 greenon=False
 
 
+carmovingtime=[0,0,0,0]
+
+# prevtime = int(time.time())
+
+def movecars():
+    global carmovingtime
+
+
+    for n in range(0,4):
+        if lights[n].on==2:
+            
+
+
+            newtime = int(time.time())
+            diff=newtime-carmovingtime[n]
+
+            for i in range(0,diff):
+                if(len(cars[n])>0):
+                    cars[n].remove(n)
+
+                    moveto=random.choice(prevlights[n])
+
+
+                    movingcars.append(Car(n,moveto,locations[n],locations[moveto]))
+
+
+
+
+        carmovingtime[n] = int(time.time())
+
+
+
+def carpassed(n):
+
+    fromto=movingcars.pop(n)
+    # print("passed",fromto)
+    
+
+
+
 run=True
 while(run):
     clock.tick(60)
+
+    # sio.emit('msg', {'lights': str(lights)})
 
     win.fill((0,0,0))
 
@@ -116,15 +210,43 @@ while(run):
 
             greenon=False
 
+    
+    for n,car in enumerate(movingcars):
+
+        car.move()
+        car.draw(win)
+
+        if car.x<0 or car.x >WIN_WIDTH:
+            carpassed(n)
+
+        if car.y<0 or car.y >WIN_HEIGHT:
+            carpassed(n)
+
+
 
     for n, light in enumerate(lights):
 
-        light.cars=len(cars[n])
+        
         light.checkcars()
         
         light.running()
+
+        light.cars=cars[n]
         
         light.draw(win)
+
+    
+    movecars()
+
+
+
+
+
+
+    # text = STAT_FONT.render(
+    #     "flask values "+str(a), 1, (100, 100, 100))
+
+    # win.blit(text, (10, 10))
 
     
     countremainingtime()
@@ -133,4 +255,12 @@ while(run):
 
 
     pygame.display.update()
+
+
+
+
+
+
+
+
 
