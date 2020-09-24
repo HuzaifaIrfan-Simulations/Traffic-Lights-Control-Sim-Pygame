@@ -93,7 +93,46 @@ lights=[Light(locations[directions[0]]),Light(locations[directions[1]]),Light(lo
 
 
 
-prevlights=[[3,2,1],[0,3,2],[1,0,3],[2,1,0]]
+# prevlights=[[3,2,1],[0,3,2],[1,0,3],[2,1,0]]
+# prevlights=[[3,2,1],[0,3,2],[1,0,3],[2,1,0]]
+
+prevlights=[]
+
+for n in range(0,len(directions)):
+
+    lst=[]
+
+
+    nnow=n-1
+
+    if nnow<0:
+        nnow=len(directions)-1
+
+
+
+    for i in range(0,len(directions)-1):
+
+        # if nnow=n:
+        #     nnow=len(directions)-1
+
+        lst.append(nnow)
+
+        nnow-=1
+
+        if nnow<0:
+            nnow=len(directions)-1
+
+
+
+
+
+
+    prevlights.append(lst)
+
+
+
+
+
 
 def countremainingtime():
     global prevlights
@@ -156,7 +195,12 @@ greenon=False
 #                 if(len(cars[n])>0):
 #                     cars[n].remove(n)
 
-#                     moveto=random.choice(prevlights[n])
+#                      moveto=n
+
+                        # if len(prevlights)>0:
+                        #     if len(prevlights[n])>0:
+
+                        #         moveto=random.choice(prevlights[n])
 
 
 #                     movingcars.append(Car(n,moveto,locations[n],locations[moveto]))
@@ -221,7 +265,7 @@ while(run):
         if lights[lightnow].setgreen==False:
             lightnow+=1
 
-            if lightnow>3:
+            if lightnow>len(directions)-1:
                 lightnow=0
 
             greenon=False

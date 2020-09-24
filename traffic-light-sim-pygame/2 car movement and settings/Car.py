@@ -23,7 +23,7 @@ STAT_FONT = pygame.font.SysFont("comicsans", 30)
 
 movements={
     "north":{
-        "north":[0,0],
+        "north":[0,-1],
         "west":[-1,1],
         "south":[0,1],
         "east":[1,1]
@@ -32,7 +32,7 @@ movements={
 
     "west":{
         "north":[1,-1],
-        "west":[0,0],
+        "west":[-1,0],
         "south":[1,1],
         "east":[1,0]
     },
@@ -40,7 +40,7 @@ movements={
     "south":{
         "north":[0,-1],
         "west":[-1,-1],
-        "south":[0,0],
+        "south":[0,1],
         "east":[1,-1]
     },
 
@@ -48,7 +48,7 @@ movements={
         "north":[-1,-1],
         "west":[-1,0],
         "south":[-1,1],
-        "east":[0,0]
+        "east":[1,0]
     }
 
 }

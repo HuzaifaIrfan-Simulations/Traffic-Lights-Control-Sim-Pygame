@@ -75,10 +75,13 @@ movingcars=[]
 
 
 
-lights=[Light(locations[directions[0]]),Light(locations[directions[1]]),Light(locations[directions[2]]),Light(locations[directions[3]])]
+# lights=[Light(locations[directions[0]]),Light(locations[directions[1]]),Light(locations[directions[2]]),Light(locations[directions[3]])]
+lights=[]
 
+for i, direction in enumerate(directions):
+    lights.append(Light(locations[directions[i]]))
 
-for i in range(0,4):
+for i in range(0,len(directions)):
     num=randint(mincargen,maxcargen)
     for n in range(0,num):
         cars[i].append(i)
@@ -96,7 +99,43 @@ def getnewcars(i):
 
 
 
-prevlights=[[3,2,1],[0,3,2],[1,0,3],[2,1,0]]
+# prevlights=[[3,2,1],[0,3,2],[1,0,3],[2,1,0]]
+
+prevlights=[]
+
+for n in range(0,len(directions)):
+
+    lst=[]
+
+
+    nnow=n-1
+
+    if nnow<0:
+        nnow=len(directions)-1
+
+
+
+    for i in range(0,len(directions)-1):
+
+        # if nnow=n:
+        #     nnow=len(directions)-1
+
+        lst.append(nnow)
+
+        nnow-=1
+
+        if nnow<0:
+            nnow=len(directions)-1
+
+
+
+
+
+
+    prevlights.append(lst)
+
+# print(prevlights)
+
 
 def countremainingtime():
     global prevlights
@@ -107,10 +146,12 @@ def countremainingtime():
 
         remtime=0
 
+
         if lights[n].setgreen==True:
             lights[n].waitingtime=0
         else:
             for i in prevlight:
+                
                 if lights[i].setgreen==True:
                     remtime += lights[i].totalrunningtime
                     break
@@ -145,7 +186,7 @@ def movecars():
     global carmovingtime
 
 
-    for n in range(0,4):
+    for n in range(0,len(directions)):
         if lights[n].on==2:
             
 
@@ -159,7 +200,12 @@ def movecars():
                 if(len(cars[n])>0):
                     cars[n].remove(n)
 
-                    moveto=random.choice(prevlights[n])
+                    moveto=n
+
+                    if len(prevlights)>0:
+                        if len(prevlights[n])>0:
+
+                            moveto=random.choice(prevlights[n])
 
 
                     movingcars.append(Car(n,moveto,locations[directions[n]],locations[directions[moveto]]))
@@ -204,7 +250,7 @@ while(run):
         greenon=True
 
         if lightnow==0:
-            getnewcars(3)
+            getnewcars(len(directions)-1)
         else:
             getnewcars(lightnow-1)
 
@@ -212,7 +258,7 @@ while(run):
         if lights[lightnow].setgreen==False:
             lightnow+=1
 
-            if lightnow>3:
+            if lightnow>(len(directions)-1):
                 lightnow=0
 
             greenon=False

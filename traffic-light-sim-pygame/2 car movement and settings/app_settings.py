@@ -5,7 +5,7 @@
 
 shift=50
 
-directions=["south","west","north","east"]
+directions=["south","east","north","west"]
 
 locations={
     "north":(shift+250,shift+0),
