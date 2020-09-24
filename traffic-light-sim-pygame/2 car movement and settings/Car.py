@@ -10,6 +10,7 @@ import time
 from app_settings import carsize ,setcaracc,setcarvel,caracc,carvel
 
 
+from app_settings import directions, locations
 
 
 pygame.font.init()
@@ -20,39 +21,39 @@ STAT_FONT = pygame.font.SysFont("comicsans", 30)
 
 
 
+movements={
+    "north":{
+        "north":[0,0],
+        "west":[-1,1],
+        "south":[0,1],
+        "east":[1,1]
+
+    },
+
+    "west":{
+        "north":[1,-1],
+        "west":[0,0],
+        "south":[1,1],
+        "east":[1,0]
+    },
+
+    "south":{
+        "north":[0,-1],
+        "west":[-1,-1],
+        "south":[0,0],
+        "east":[1,-1]
+    },
+
+    "east":{
+        "north":[-1,-1],
+        "west":[-1,0],
+        "south":[-1,1],
+        "east":[0,0]
+    }
+
+}
 
 
-movements=[
-    [
-        [0,0],
-        [-1,1],
-        [0,1],
-        [1,1]
-
-    ],
-
-    [
-        [1,-1],
-        [0,0],
-        [1,1],
-        [1,0]
-    ],
-
-    [
-        [0,-1],
-        [-1,-1],
-        [0,0],
-        [1,-1]
-    ],
-
-    [
-        [-1,-1],
-        [-1,0],
-        [-1,1],
-        [0,0]
-    ]
-
-]
 
 
 
@@ -88,7 +89,7 @@ def setvelocity(movefrom,moveto):
 
 
     
-    movement=movements[movefrom][moveto]
+    movement=movements[directions[movefrom]][directions[moveto]]
 
     vx = movement[0]*vel
     vy = movement[1]*vel
@@ -117,7 +118,7 @@ def setacceleration(movefrom,moveto):
 
 
 
-    movement=movements[movefrom][moveto]
+    movement=movements[directions[movefrom]][directions[moveto]]
 
     ax=movement[0]*acc
     ay=movement[1]*acc
@@ -179,7 +180,7 @@ class Car:
 
 
         # self.animatetime=0
-        # print(self)
+        print(self)
 
 
 
@@ -203,7 +204,7 @@ class Car:
 
 
     def __str__(self):
-        msg=str(self.movefrom)+" to "+ str(self.moveto)
+        msg=str(directions[self.movefrom])+" to "+ str(directions[self.moveto])
         return msg
 
 

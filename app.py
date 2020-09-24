@@ -63,12 +63,7 @@ pygame.font.init()
 
 STAT_FONT = pygame.font.SysFont("comicsans", 30)
 
-shift=50
-
-directions=["north","east","south","west"]
-
-locations=[(shift+250,shift+0),(shift+0,shift+250),(shift+250,shift+500),(shift+500,shift+250)]
-
+from app_settings import directions, locations
 
 
 
@@ -77,7 +72,7 @@ locations=[(shift+250,shift+0),(shift+0,shift+250),(shift+250,shift+500),(shift+
 # movingcars=[]
 
 
-lights=[Light(locations[0]),Light(locations[1]),Light(locations[2]),Light(locations[3])]
+lights=[Light(locations[directions[0]]),Light(locations[directions[1]]),Light(locations[directions[2]]),Light(locations[directions[3]])]
 
 
 # for i in range(0,4):

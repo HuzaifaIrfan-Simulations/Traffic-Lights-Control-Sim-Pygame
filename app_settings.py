@@ -2,6 +2,19 @@
 
 
 
+shift=50
+
+directions=["north","west","south","east"]
+
+locations={
+    "north":(shift+250,shift+0),
+    "west":(shift+0,shift+250),
+    "south":(shift+250,shift+500),
+    "east":(shift+500,shift+250)
+    }
+
+
+
 
 # settings used in app.py
 # carmovepersecond=1
