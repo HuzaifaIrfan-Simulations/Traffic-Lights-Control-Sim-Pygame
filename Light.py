@@ -63,7 +63,7 @@ class Light:
         win.blit(text, (self.x-20, self.y+size+30))
 
         text = STAT_FONT.render(
-            "Cars = "+str(len(self.cars)), 1, (100, 100, 100))
+            "Cars = "+str(self.numberofcars), 1, (100, 100, 100))
 
         win.blit(text, (self.x-20, self.y+size+50))
 

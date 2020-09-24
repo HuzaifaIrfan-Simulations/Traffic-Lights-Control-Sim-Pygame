@@ -29,6 +29,12 @@ except:
     print(f"Cannot Connect to Server at {serveraddress}")
 
 
+@sio.event
+def connect():
+    print(sio.sid)
+    print(f'Connection established at {serveraddress}')
+
+
 # show by matplotlib
 
 def showmplt(outimg):
@@ -74,9 +80,9 @@ def getnumofcars(dirobj):
     try:
         pass
 
-        # im = cv2.imread('test.jpg')
+        im = cv2.imread('test.jpg')
 
-        # numofcars=countcomobj(im)
+        numofcars = countcomobj(im)
 
     except:
         pass

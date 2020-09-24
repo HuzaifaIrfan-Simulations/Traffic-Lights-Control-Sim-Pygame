@@ -66,6 +66,12 @@ except:
 
 
 @sio.event
+def connect():
+    print(sio.sid)
+    print(f'Connection established at {serveraddress}')
+
+
+@sio.event
 def returnnumcars(numcarsobj):
     print(numcarsobj)
 

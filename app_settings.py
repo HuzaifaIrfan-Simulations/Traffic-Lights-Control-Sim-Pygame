@@ -2,7 +2,7 @@
 
 # socketio Server host and port number
 host = "localhost"
-port = 3006
+port = 3007
 
 
 shift = 50
@@ -51,9 +51,16 @@ defaultgreenlighttime = 10
 carcountsettings = [
 
     {
+        "mincars": 30,
+        "yellow": 10,
+        "green": 30
+    },
+
+
+    {
         "mincars": 20,
         "yellow": 5,
-        "green": 10
+        "green": 20
     },
 
     {
