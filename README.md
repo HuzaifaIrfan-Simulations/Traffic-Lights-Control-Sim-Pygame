@@ -6,9 +6,10 @@ Developed on : 17 September 2020
 
 ## Description
 
+### Project Video:
+[Project Video](https://www.youtube.com/watch?v=HSHiDya4hb8)
 
-
-## Test Components:
+### Test Components:
 
 Pygame Based Traffic Lights Simulations
 
@@ -32,7 +33,6 @@ for use in setting the Green and Yellow Lights Timing wrt Cars in that Lane.
 ## Yolo Cars Detection Screen Shot
 
 ![Yolo Counter](/yolo-cars.png)
-
 
 
 
