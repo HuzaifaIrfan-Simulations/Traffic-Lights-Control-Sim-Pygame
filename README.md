@@ -1,5 +1,4 @@
-# traffic-light-sim
-re
+# Traffic Control System
 
 Developed By Huzaifa Irfan
 Developed on : 17 September 2020
