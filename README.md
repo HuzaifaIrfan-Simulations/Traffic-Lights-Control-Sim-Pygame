@@ -1,6 +1,6 @@
 # Traffic Control System
 
-Developed By Huzaifa Irfan
+Internet Searched and Developed By Huzaifa Irfan
 Developed on : 17 September 2020
 
 
