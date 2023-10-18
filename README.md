@@ -20,10 +20,6 @@ And Some kind of Message Queue Server to Communicate Between the Two.
 for use in setting the Green and Yellow Lights Timing wrt Cars in that Lane.
 
 
-#### !! Final Project should Include Arduino/Raspberry PI/Jetson based Single Board Computers with Real Traffic Lights and Cameras.
-
-
-
 ## Pygame Traffic Lights Simulation Screen Shot
 
 ![Pygame Lights](/pygame-lights.png)
